@@ -2,9 +2,9 @@ FROM codercom/code-server:latest
 USER root
 LABEL maintainer="andif888"
 ENV DEBIAN_FRONTEND=noninteractive
-ENV TF_VERSION=1.12.2
-ENV PACKER_VERSION=1.14.1
-ENV VAULT_VERSION=1.20.2
+ENV TF_VERSION=1.13.3
+ENV PACKER_VERSION=1.14.2
+ENV VAULT_VERSION=1.20.3
 ENV DRONE_VERSION=1.9.0
 
 ENV pip_packages="ansible cryptography pywinrm kerberos requests requests_kerberos requests-credssp passlib msrest msrestazure PyVmomi markdown2 pymssql proxmoxer ansible-doctor"
