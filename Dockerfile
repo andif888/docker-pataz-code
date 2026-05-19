@@ -29,7 +29,6 @@ RUN apt-get update \
         openssh-client \
         python3 \
         python3-dev \
-        python3-distutils \
         python3-gssapi \
         python3-pip \
         python3-netaddr \
@@ -39,7 +38,7 @@ RUN apt-get update \
         python3-wheel \
         python3-pymssql \
         python3-hvac \
-        software-properties-common \
+        # software-properties-common \
         sshpass \
         unzip \
         xorriso \
@@ -65,8 +64,8 @@ RUN apt-get update \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
     && apt-get clean
 
-RUN pip3 install --break-system-packages --upgrade pip \
-    && pip3 install --break-system-packages $pip_packages \
+# RUN pip3 install --break-system-packages --upgrade pip \
+RUN pip3 install --break-system-packages $pip_packages \
     && pip3 install --break-system-packages 'ansible' \
     && ansible-galaxy collection install azure.azcollection community.general community.hashi_vault community.proxmox
 
@@ -89,8 +88,9 @@ RUN curl -O https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${T
 
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
-RUN pip3 install --break-system-packages -r /usr/local/lib/python3.11/dist-packages/ansible_collections/azure/azcollection/requirements.txt
-RUN pip3 install --break-system-packages azure-mgmt-datalake-store azure-mgmt-datalake-analytics && pip3 install --break-system-packages --upgrade requests
+RUN rm -rf /usr/lib/python3/dist-packages/requests*
+RUN pip3 install --break-system-packages -r /usr/local/lib/python3.13/dist-packages/ansible_collections/azure/azcollection/requirements.txt
+RUN pip3 install --break-system-packages azure-mgmt-datalake-store azure-mgmt-datalake-analytics
 
 # RUN curl -O https://vdc-download.vmware.com/vmwb-repository/dcr-public/8a93ce23-4f88-4ae8-b067-ae174291e98f/c609234d-59f2-4758-a113-0ec5bbe4b120/VMware-ovftool-4.6.2-22220919-lin.x86_64.zip \
 #     && unzip VMware-ovftool-4.6.2-22220919-lin.x86_64.zip -d /opt \
