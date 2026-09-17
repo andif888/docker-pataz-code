@@ -2,9 +2,9 @@ FROM codercom/code-server:latest
 USER root
 LABEL maintainer="andif888"
 ENV DEBIAN_FRONTEND=noninteractive
-ENV TF_VERSION=1.15.3
-ENV PACKER_VERSION=1.15.3
-ENV VAULT_VERSION=2.0.0
+ENV TF_VERSION=1.16.3
+ENV PACKER_VERSION=1.16.0
+ENV VAULT_VERSION=2.1.1
 ENV DRONE_VERSION=1.9.0
 
 ENV pip_packages="ansible cryptography pywinrm kerberos requests requests_kerberos requests-credssp passlib msrest msrestazure PyVmomi markdown2 pymssql proxmoxer ansible-doctor"
@@ -89,6 +89,7 @@ RUN curl -O https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${T
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
 RUN rm -rf /usr/lib/python3/dist-packages/requests*
+RUN rm -rf /usr/lib/python3/dist-packages/typing_extensions*
 RUN pip3 install --break-system-packages -r /usr/local/lib/python3.13/dist-packages/ansible_collections/azure/azcollection/requirements.txt
 RUN pip3 install --break-system-packages azure-mgmt-datalake-store azure-mgmt-datalake-analytics
 
